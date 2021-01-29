@@ -1,0 +1,3 @@
+[submodule "Assets/injector"]
+	path = Assets/injector
+	url = https://github.com/alvmivan/injector.git

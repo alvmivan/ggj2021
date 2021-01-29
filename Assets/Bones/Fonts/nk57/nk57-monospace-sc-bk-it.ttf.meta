@@ -1,0 +1,32 @@
+fileFormatVersion: 2
+guid: 02403449b2d92e645ad1eec1a2a72d4e
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: NK57 Monospace
+  fontNames:
+  - NK57 Monospace
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 5174cbc193de474468c88e561858ad08, type: 3}
+  - {fileID: 12800000, guid: 01926a92f62575e49a038a2fdc0495be, type: 3}
+  - {fileID: 12800000, guid: 505b9763f248f104f8143ee93f9cd641, type: 3}
+  - {fileID: 12800000, guid: d0398d1491b8ed848b6a89553492c3b5, type: 3}
+  - {fileID: 12800000, guid: 11b7a3e480f65b3449f3ef056d0341bd, type: 3}
+  - {fileID: 12800000, guid: c02d8b37278356041ba48f07425b79cf, type: 3}
+  - {fileID: 12800000, guid: d0c6bc48524c096479c05fdc10c2a937, type: 3}
+  - {fileID: 12800000, guid: 903ae179d49cd26479fd2b9952e5ccaa, type: 3}
+  - {fileID: 12800000, guid: 1176db8dc337d154b96246b8fd100a5f, type: 3}
+  - {fileID: 12800000, guid: f1ad875f91c344c439b4f4d93967ec4d, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
