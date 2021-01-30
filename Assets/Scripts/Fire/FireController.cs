@@ -29,7 +29,7 @@ namespace Fire
         private void SetFireLevel(int level)
         {
             fireLevel = level;
-            var visualLevel = Mathf.InverseLerp(0, maxLevel, level);
+            var visualLevel = Mathf.InverseLerp(-1, maxLevel, level);
             view.SetFireIntensity(visualLevel);
         }
 

@@ -14,7 +14,9 @@ namespace Wolf
         public CharacterController characterController;
         public Transform stickHolder;
 
-
+        public float[] heatLevels = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+        
+        
         #if UNITY_EDITOR
         private float cheatSpeed = 10;
         #else
@@ -82,7 +84,7 @@ namespace Wolf
 
         public void SetHeath(int fireLevel)
         {
-            currentHeath.Value = Mathf.Max(fireLevel, currentHeath.Value);
+            currentHeath.Value = Mathf.Max(heatLevels[fireLevel], currentHeath.Value);
         }
     }
 }
