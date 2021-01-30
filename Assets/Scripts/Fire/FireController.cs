@@ -33,10 +33,18 @@ namespace Fire
             view.SetFireIntensity(visualLevel);
         }
 
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.TryGetComponent<WolfController>(out var wolf))
+            {
+                wolf.SetNearFire(false);
+            }
+        }
         private void OnTriggerStay(Collider other)
         {
             if (other.TryGetComponent<WolfController>(out var wolf))
             {
+                wolf.SetNearFire(true);
                 wolf.SetHeath(fireLevel);
                 var stick = wolf.DropStick();
                 

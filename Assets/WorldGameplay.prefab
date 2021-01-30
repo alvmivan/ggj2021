@@ -4825,6 +4825,16 @@ MonoBehaviour:
   rotationSpeed: 45
   characterController: {fileID: 4633614069404295850}
   stickHolder: {fileID: 6099654119559279100}
+  heatLevels:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
 --- !u!65 &9123004187015071346
 BoxCollider:
   m_ObjectHideFlags: 0

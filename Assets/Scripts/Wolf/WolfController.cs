@@ -1,6 +1,7 @@
 ﻿using System;
 using Fire;
 using Gameplay;
+using Injector.Core;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Animations;
@@ -15,29 +16,44 @@ namespace Wolf
         public Transform stickHolder;
 
         public float[] heatLevels = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
-        
-        
-        #if UNITY_EDITOR
-        private float cheatSpeed = 10;
-        #else
+
+
+#if UNITY_EDITOR
+        private float cheatSpeed = 4;
+#else
         private float cheatSpeed = 1;
-        #endif
+#endif
+
+        private bool nearFire = false;
         
         //variables
         Vector2 axesInput;
         private Stick stick;
+        float cheat = 1;
 
-        public readonly ReactiveProperty<float> currentHeath = new ReactiveProperty<float>(1);
+        public readonly ReactiveProperty<float> currentHeat = new ReactiveProperty<float>(1);
 
         private void Awake()
         {
-            currentHeath.Value = 1;
+            Injection.Register(this);
+            currentHeat.Value = 1;
         }
 
         private void Update()
         {
             Walk();
             UpdateStick();
+            UpdateHeat();
+        }
+
+        private void UpdateHeat()
+        {
+            const float coldness = 1;
+            if (nearFire)
+            {
+                return;
+            }
+            currentHeat.Value -= Time.deltaTime * coldness;
         }
 
         private void UpdateStick()
@@ -50,23 +66,26 @@ namespace Wolf
 
         private void Walk()
         {
-            axesInput = new Vector2(Input.GetAxis("Horizontal"), Mathf.Max(Input.GetAxis("Vertical"),0));
+            const string horizontal = "Horizontal";
+            const string vertical = "Vertical";
+
+            axesInput = new Vector2(Input.GetAxis(horizontal), Mathf.Max(Input.GetAxis(vertical), 0));
 
             if (GlobalProperties.PlayerInputBlocked.Value) return;
 
-            var cheat = Input.GetKey(KeyCode.LeftShift)?cheatSpeed:1;
-            characterController.SimpleMove(characterController.transform.forward * (speed * axesInput.y * cheat));
+            cheat = Input.GetKey(KeyCode.LeftShift) ? cheatSpeed : 1;
 
+            characterController.SimpleMove(characterController.transform.forward * (speed * axesInput.y * cheat));
         }
 
         private void FixedUpdate()
         {
-            characterController.transform.Rotate(0, rotationSpeed * axesInput.x * Time.fixedDeltaTime, 0);
+            characterController.transform.Rotate(0, rotationSpeed * axesInput.x * Time.fixedDeltaTime * cheat, 0);
         }
 
         public void GrabStick(Stick s)
         {
-            if(stick) 
+            if (stick)
                 return;
             stick = s;
         }
@@ -78,13 +97,19 @@ namespace Wolf
             {
                 stick.OnDrop();
             }
+
             stick = null;
             return ret;
         }
 
         public void SetHeath(int fireLevel)
         {
-            currentHeath.Value = Mathf.Max(heatLevels[fireLevel], currentHeath.Value);
+            currentHeat.Value = Mathf.Max(heatLevels[fireLevel], currentHeat.Value);
+        }
+
+        public void SetNearFire(bool near)
+        {
+            nearFire = near;
         }
     }
 }
